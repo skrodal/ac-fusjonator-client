@@ -19,3 +19,6 @@ Klienten er registrert i UNINETT Connect tjenesteplattform og benytter seg av f√
 
 - https://github.com/skrodal/ac-fusjonator-api
   - Proxy mellom klient og Adobe Connect
+
+
+![Preview](/app/img/ConnectFusjonator.png)
