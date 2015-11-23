@@ -15,33 +15,32 @@ var ADOBECONNECT = (function () {
 	// Mainly for testing/dev
 	function _getAPIRoutesXHR() {
 		return jso.ajax({
-			url: jso.config.get("endpoints").adobeconnect,
-			dataType: 'json'
-		})
+				url: jso.config.get("endpoints").adobeconnect,
+				dataType: 'json'
+			})
 			.done(function (response) {
 				console.log(response);
 			})
 			.fail(function (jqXHR, textStatus, error) {
 				UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + jqXHR.responseJSON.message + "</code></p>");
+				return false;
 			});
 	}
 
 	function _getACVersionXHR() {
 		return jso.ajax({
-					url: jso.config.get("endpoints").adobeconnect + 'version/',
-					dataType: 'json'
-				})
-				.pipe(function (response) {
-					return response.status ? response.data : false;
-				})
-				.fail(function (jqXHR, textStatus, error) {
-					var message = jqXHR.responseJSON && jqXHR.responseJSON.message || 'Fikk ingen respons fra tjener. Timeout?';
-					UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + message + "</code></p>");
-				});
+				url: jso.config.get("endpoints").adobeconnect + 'version/',
+				dataType: 'json'
+			})
+			.pipe(function (response) {
+				return response.data;
+			})
+			.fail(function (jqXHR, textStatus, error) {
+				var message = jqXHR.responseJSON && jqXHR.responseJSON.message || 'Fikk ingen respons fra tjener. Timeout?';
+				UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + message + "</code></p>");
+				return false;
+			});
 	};
-
-
-
 
 
 	/**
@@ -64,35 +63,31 @@ var ADOBECONNECT = (function () {
 				new_csv_arr.push(csv);
 			});
 			return jso.ajax({
-						// Fusjonator endpoint that takes a POSTed array of user CSV (oldLogin, newLogin)
-						url: jso.config.get("endpoints").adobeconnect + 'users/verify/',
-						method: 'POST',
-						data: {
-							user_list: new_csv_arr
-							// token : breezeToken
-						},
-						dataType: 'json'
-					})
-					// Pipe the response so we can preprocess a little bit..
-					.pipe(function (response) {
-						if(response.status == true) {
-							if (!jQuery.isEmptyObject(response.data)) {
-								return response.data;
-							} else {
-								UTILS.alertError("Adobe Connect", "<p>Fikk tom liste i svar fra Adobe Connect. Kan virke som om ingen av brukernavnene i lista di finnes i Adobe Connect.</p>");
-							}
-						} else {
-							UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + response.message + "</code></p>");
-						}
+					// Fusjonator endpoint that takes a POSTed array of user CSV (oldLogin, newLogin)
+					url: jso.config.get("endpoints").adobeconnect + 'users/verify/',
+					method: 'POST',
+					data: {
+						user_list: new_csv_arr
+						// token : breezeToken
+					},
+					dataType: 'json'
+				})
+				// Pipe the response so we can preprocess a little bit..
+				.pipe(function (response) {
+					if (!jQuery.isEmptyObject(response.data)) {
+						return response.data;
+					} else {
+						UTILS.alertError("Fusjonator API", "<p>Fikk tom liste i svar fra Adobe Connect. Kan virke som om ingen av brukernavnene i lista di finnes i Adobe Connect.</p>");
 						return false;
-					})
-					.fail(function (jqXHR, textStatus, error) {
-						var message = jqXHR.responseJSON && jqXHR.responseJSON.message || 'Fikk ingen respons fra tjener. Timeout?';
-						UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + message + "</code></p>");
-						return false;
-					});
+					}
+				})
+				.fail(function (jqXHR, textStatus, error) {
+					var message = jqXHR.responseJSON && jqXHR.responseJSON.message || 'Fikk ingen respons fra tjener. Timeout?';
+					return false;
+				});
 		} else {
 			UTILS.alertError("Adobe Connect", "<p>Mangler CSV data!</p>");
+			return false;
 		}
 	}
 
@@ -103,39 +98,32 @@ var ADOBECONNECT = (function () {
 	 * @returns {*}
 	 * @private
 	 */
-	function _migrateUserAccountsXHR(){
-		if(MIGRATION_DATA) {
+	function _migrateUserAccountsXHR() {
+		if (MIGRATION_DATA) {
 			return jso.ajax({
-						// Fusjonator endpoint that takes a POSTed object of users to be migrated (oldLogin, newLogin)
-						url: jso.config.get("endpoints").adobeconnect + 'users/migrate/',
-						method: 'POST',
-						data: {
-							user_list: MIGRATION_DATA
-							// token : breezeToken
-						},
-						dataType: 'json'
-					})
-					// Pipe the response so we can preprocess a little bit..
-					.pipe(function (response) {
-						if(response.status == true) {
-							return response.data;
-						} else {
-							UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + response.message + "</code></p>");
-						}
-						return false;
-					})
-					.fail(function (jqXHR, textStatus, error) {
-						var message = jqXHR.responseJSON && jqXHR.responseJSON.message || 'Fikk ingen respons fra tjener. Timeout?';
-						UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API:</p><p><code>" + message + "</code></p>");
-						return false;
-					});
+					// Fusjonator endpoint that takes a POSTed object of users to be migrated (oldLogin, newLogin)
+					url: jso.config.get("endpoints").adobeconnect + 'users/migrate/',
+					method: 'POST',
+					data: {
+						user_list: MIGRATION_DATA
+						// token : breezeToken
+					},
+					dataType: 'json'
+				})
+				// Pipe the response so we can preprocess a little bit..
+				.pipe(function (response) {
+					return response.data;
+				})
+				.fail(function (jqXHR, textStatus, error) {
+					var message = jqXHR.responseJSON && jqXHR.responseJSON.message || 'Fikk ingen respons fra tjener. Timeout?';
+					UTILS.alertError("Adobe Connect", "<p>En feil oppstod i samtale med Adobe Connect API: </p><p><code>" + message + "</code></p>");
+					return false;
+				});
 		} else {
 			UTILS.alertError("Adobe Connect", "<p>'Mangler migreringsdata!'</p>");
+			return false;
 		}
 	}
-
-
-
 
 
 	// ----------- SETTERS ----------- //
@@ -143,7 +131,9 @@ var ADOBECONNECT = (function () {
 	function _setCSVData(csvData) {
 		CSV_DATA = csvData;
 		// If CSV is invalid, also set any cleared migration data to false.
-		if(!CSV_DATA) { MIGRATION_DATA = false; }
+		if (!CSV_DATA) {
+			MIGRATION_DATA = false;
+		}
 	}
 
 	function _setMigrationData(migrationData) {
@@ -153,7 +143,7 @@ var ADOBECONNECT = (function () {
 	// ----------- ./SETTERS ----------- //
 
 	return {
-		verifyAccountListXHR : function () {
+		verifyAccountListXHR: function () {
 			return _verifyAccountListXHR();
 		},
 		migrateUserAccountsXHR: function () {
@@ -170,7 +160,7 @@ var ADOBECONNECT = (function () {
 		getCSVData: function () {
 			return CSV_DATA;
 		},
-		getMigrationData: function(){
+		getMigrationData: function () {
 			return MIGRATION_DATA;
 		},
 		getAPIRoutesXHR: function () {

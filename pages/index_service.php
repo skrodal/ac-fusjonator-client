@@ -8,17 +8,11 @@
 						<h3 class="box-title ion-code-working"> 1. Lim inn brukerliste (CSV)</h3>
 					</div>
 					<div class="box-body">
-<textarea name="" id="txtCSV" class="form-control" rows="6" style="width: 100%;" placeholder="gammelt@brukernavn.no, nytt@brukernavn.no">
-borborson@uninett.no, borborson@feide.no
-borsonfeidesen@feide.no, borsonfeidesen@uninett.no
-karius@hin.no, karius@uit.no
-baktus@hin.no, baktus@uit.no
-kasper@hin.no, kasper@uit.no
-renlin@uninett.no, simon@uninett.no
-</textarea>
+						<textarea name="" id="txtCSV" class="form-control" rows="6" style="width: 100%;" placeholder="gammelt@brukernavn.no, nytt@brukernavn.no"></textarea>
 						<br/>
 						<p class="clearfix">
-							<button id="btnCheckCSV" data-toggle="modal" data-target="#csvPreviewModal" class="btn btn-info btn-sm pull-right icon ion-checkmark"> Inspiser format</button>
+							<button id="btnInsertTestDataCSV" class="btn btn-link btn-sm pull-left icon ion-code-working"> Sett inn testdata</button>
+							<button id="btnCheckCSV" data-toggle="modal" data-target="#infoModal" class="btn btn-info btn-sm pull-right icon ion-checkmark"> Inspiser format</button>
 						</p>
 
 						<div id="csvStatusMsg" class="hidden">
@@ -29,7 +23,7 @@ renlin@uninett.no, simon@uninett.no
 								For å sjekke kontostatus i Adobe Connect for alle brukere i lista, klikk på knappen nedenfor.
 							</p>
 							<p>
-								<span id="submitCSVForInspection" data-toggle="modal" data-target="#csvPreviewModal" class="btn btn-success">Sjekk kontostatus</span>
+								<span id="submitCSVForInspection" data-toggle="modal" data-target="#infoModal" class="btn btn-success">Sjekk kontostatus</span>
 							</p>
 						</div>
 					</div>
@@ -111,7 +105,7 @@ renlin@uninett.no, simon@uninett.no
 	</section>
 
 	<!-- CSV Table Modal -->
-	<div id="csvPreviewModal" class="modal">
+	<div id="infoModal" class="modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header bg-dark-gray">

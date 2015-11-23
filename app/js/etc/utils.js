@@ -1,9 +1,9 @@
-var UTILS = (function() {
+var UTILS = (function () {
 
 	/**** AUTH CYCLE ****/
-	  
-	 
-	 
+
+
+
 	function _updateAuthProgress(msg) {
 		var w = parseInt($('#authProgressBar')[0].style.width.slice(0, -1));
 		// This one here is a bit dumb, but basically change the number so that 
@@ -12,7 +12,7 @@ var UTILS = (function() {
 		$('#authProgressBar').text(msg);
 
 		if ($('#authProgressBar')[0].style.width.slice(0, -1) >= 100) {
-			$('#pageLoading').fadeOut(function(){
+			$('#pageLoading').fadeOut(function () {
 				$('#pageDashboard').fadeIn().removeClass('hidden');
 			});
 		}
@@ -29,35 +29,46 @@ var UTILS = (function() {
 		$('#error_modal').modal('show');
 	}
 
-	function _isAlphaNumeric(input){
+	function _isAlphaNumeric(input) {
 		var validChars = /^[a-zA-Z0-9]+[a-zA-Z0-9-_]+[a-zA-Z0-9]$/;
-		if(!(validChars.test(input))){
+		if (!(validChars.test(input))) {
 			return false
 		}
 		return true;
 	}
 
-	function _isset(variable){
+	function _isset(variable) {
 		return typeof(variable) != "undefined" && variable !== null;
 	}
+
+	function _getObjectSize(obj) {
+		var len = 0, key;
+		for (key in obj) {
+			if (obj.hasOwnProperty(key)) len++;
+		}
+		return len;
+	};
 
 
 	/*** Expose public functions ***/
 	return {
-		isAlphaNumeric: function(input){
+		isAlphaNumeric: function (input) {
 			return _isAlphaNumeric(input);
 		},
-		updateAuthProgress: function(msg) {
+		updateAuthProgress: function (msg) {
 			_updateAuthProgress(msg);
 		},
-		showAuthError: function(funcname, msg) {
+		showAuthError: function (funcname, msg) {
 			_showAuthError(funcname, msg);
 		},
-		alertError : function(title, message) {
+		alertError: function (title, message) {
 			_alertError(title, message);
 		},
-		isset : function(variable){
+		isset: function (variable) {
 			return _isset(variable);
+		},
+		getObjectSize: function (obj) {
+			return _getObjectSize(obj);
 		}
 
 	}
