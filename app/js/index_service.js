@@ -136,10 +136,15 @@ $('#submitCSVForInspection').on('click', function () {
 	$infoModalTitle.html('Status brukerkontoer');
 	$infoModalBody.html(ajaxSpinner);
 
+	console.info('Sender følgende CSV til ConnectFusjonator API for inspeksjon:');
+	console.info(ADOBECONNECT.getCSVData());
+
 	$.when(ADOBECONNECT.verifyAccountListXHR()).done(function (response) {
 		// Called function will handle error msgs, only react to good news here...
 		if (response !== false) {
 			bodyHtml += '<p>Alle brukernavn har nå blitt sjekket i Adobe Connect. Oversikt ser du nedenfor.</p>';
+			console.info('ConnectFusjonator API har sjekket brukerliste:');
+			console.info(response);
 			// List all users that can be migrated
 			if (!jQuery.isEmptyObject(response.ok)) {
 				var $tblUserOK = $('#csvTableTemplate').clone();
@@ -157,8 +162,6 @@ $('#submitCSVForInspection').on('click', function () {
 				bodyHtml += $tblUserOK.html();
 				// THIS is the array that will be sent to Adobe Connect for actual renaming of usernames!
 				ADOBECONNECT.setMigrationData(migrationData);
-				console.log(ADOBECONNECT.getMigrationData());
-
 				// Display users that can be migrated and show button:
 				$('#preMigrationStatusMsg').html(
 					'<p>Følgende <span class="badge bg-aqua">' + migrationData.length + '</span> brukerkontoer vil fusjoneres fra gammelt brukernavn til nytt brukernavn: </p>' +
@@ -192,8 +195,6 @@ $('#submitCSVForInspection').on('click', function () {
 			$infoModalBody.html(bodyHtml);
 			// $infoModalBody.html('<pre>' + JSON.stringify(response, null, 4) + '</pre>');
 		}
-		//
-		console.info(response);
 	});
 
 });
@@ -206,7 +207,8 @@ $('#submitCSVForInspection').on('click', function () {
  */
 $('div#preMigrationStatusMsg').on('click', 'button#btnMigrateUsers',function () {
 	var bodyHtml = '';
-	console.info('User migration started!');
+	console.info('Sender følgende brukere til ConnectFusjonator API for endelig migrering:');
+	console.info(ADOBECONNECT.getMigrationData());
 	//
 	$("#postMigrationStatusMsg").html('<p>Gjør unna steg #1 og #2 først...</p>');
 
@@ -214,9 +216,9 @@ $('div#preMigrationStatusMsg').on('click', 'button#btnMigrateUsers',function () 
 	$infoModalBody.html(ajaxSpinner);
 
 	$.when(ADOBECONNECT.migrateUserAccountsXHR()).done(function (response) {
-		$infoModalBody.html('<h4>Ferdig! Vis status her, oppdater siste box, nullstill alt annet (tekstbokser, CSVDATA, MIGRATIONDATA).</h4>');
-		console.info('Svar fra API fusjonering: ');
+		console.info('Status fra ConnectFusjonator API etter gjennomført migrering:');
 		console.info(response);
+		$infoModalBody.html('<h4>Ferdig! Vis status her, oppdater siste box, nullstill alt annet (tekstbokser, CSVDATA, MIGRATIONDATA).</h4>');
 	});
 
 });
