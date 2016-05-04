@@ -2,7 +2,7 @@
 //
 JSO.enablejQuery($);
 
-var FEIDE_CONNECT = (function () {
+var DATAPORTEN = (function () {
 	var USER = {};
 	USER.org = {};
 	var XHR_USER;

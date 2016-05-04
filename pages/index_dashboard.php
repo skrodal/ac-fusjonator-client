@@ -82,13 +82,13 @@ jesper@hin.no, jesper@uit.no
 				<!-- Session info (DEV) -->
 				<div class="box box-warning collapsed-box">
 					<div class="box-header with-border">
-						<h3 class="box-title ion-code-working"> Sesjonsinformasjon (fra Feide Connect)</h3>
+						<h3 class="box-title ion-code-working"> Sesjonsinformasjon (fra Dataporten)</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
 						</div>
 					</div>
 					<div class="box-body">
-						<pre id="connectSessionInfo"></pre>
+						<pre id="dataportenSessionInfo"></pre>
 					</div><!-- /.box-body -->
 				</div><!-- /.box -->
 			</div>

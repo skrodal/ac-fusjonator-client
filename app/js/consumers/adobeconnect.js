@@ -1,10 +1,10 @@
 /* global saveTextAsFile */
-/* global FEIDE_CONNECT */
+/* global DATAPORTEN */
 /* global $ */
 /* global jso */
 /* global UTILS */
 /**
- * Speaks with Adobe Connect proxy API behind Feide Connect gatekeeper.
+ * Speaks with Adobe Connect proxy API behind Dataporten gatekeeper.
  */
 
 var ADOBECONNECT = (function () {

@@ -30,7 +30,7 @@ Adobe Connect brukernavn (`login`) for en gitt bruker endres vha. `principal-upd
 
 ### Avhengigheter
 
-Klienten er registrert i UNINETT Connect tjenesteplattform og benytter seg av følgende 3.parts APIer (også registrert i Connect):
+Klienten er registrert i UNINETT Dataporten og benytter seg av følgende 3.parts APIer (også registrert i Dataporten):
 
 - https://github.com/skrodal/ac-fusjonator-api
 

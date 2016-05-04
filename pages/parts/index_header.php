@@ -39,7 +39,7 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-right">
-								<a href="https://auth.feideconnect.no/logout" onclick="jso.wipeTokens();" class="btn btn-flat ion-log-out"> Logg ut</a>
+								<a href="https://auth.dataporten.no/logout" onclick="jso.wipeTokens();" class="btn btn-flat ion-log-out"> Logg ut</a>
 							</div>
 						</li>
 					</ul>

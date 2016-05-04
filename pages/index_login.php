@@ -22,7 +22,7 @@
 
 			<div class="panel">
 				<div class="panel-body">
-					Tjenesten bruker <a href="http://www.feideconnect.no" target="_blank">(Feide)Connect fra UNINETT</a> for autentisering og dataflyt.
+					Tjenesten bruker <a href="http://www.dataporten.no" target="_blank">Dataporten fra UNINETT</a> for autentisering og dataflyt.
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 <script src="app/js/etc/utils.js"></script>
 <!-- JSO -->
 <script src="app/js/auth/jso.js"></script>
-<script src="app/js/auth/feideconnect_auth.js"></script>
+<script src="app/js/auth/dataporten_auth.js"></script>
 
 <!-- APIs -->
-<script src="app/js/consumers/feideconnect.js"></script>
+<script src="app/js/consumers/dataporten.js"></script>

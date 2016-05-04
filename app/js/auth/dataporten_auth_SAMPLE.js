@@ -1,5 +1,5 @@
 /**
- * Feide Connect JSO kickoff for this client.
+ * Dataporten JSO kickoff for this client.
  *
  * Auth and collection of user/group info, all combined in a USER object.
  *
@@ -10,18 +10,18 @@ var DEV = !true;
 
 // Settings pertaining to this client.
 var jso = new JSO({
-	providerID: "FC-ac-fusjonator",
+	providerID: "DP-ac-fusjonator",
 	client_id: "CHANGEME TO: CLIENT_ID IN DASHBOARD",
 	redirect_uri: "CHANGEME TO: REDIRECT URI IN DASHBOARD",
-	authorization: "https://auth.feideconnect.no/oauth/authorization",
+	authorization: "https://auth.dataporten.no/oauth/authorization",
 	scopes: {
 		request: ["email", "userid-feide", "userinfo", "gk_ac-fusjonator", "gk_ac-fusjonator_admin", "profile"],
 		require: ["email", "userid-feide", "userinfo", "gk_ac-fusjonator", "gk_ac-fusjonator_admin", "profile"]
 	},
 	endpoints: {
-		userinfo: "https://auth.feideconnect.no/userinfo",
-		photo: "https://auth.feideconnect.no/user/media/",
-		adobeconnect: "https://ac-fusjonator.gk.feideconnect.no/api/ac-fusjonator/"
+		userinfo: "https://auth.dataporten.no/userinfo",
+		photo: "https://auth.dataporten.no/user/media/",
+		adobeconnect: "CHANGEME TO: ac-fusjonator in DASHBOARD"
 	}
 });
 
