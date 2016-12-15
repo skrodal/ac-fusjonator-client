@@ -38,3 +38,7 @@ Klienten er registrert i UNINETT Dataporten og benytter seg av følgende 3.parts
 ### UI
 
 ![Preview](/app/img/ConnectFusjonator.png)
+
+## Annet ##
+
+Utviklet av Simon Skrødal for UNINETT
